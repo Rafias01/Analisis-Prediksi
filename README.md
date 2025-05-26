@@ -36,87 +36,96 @@ Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iams
 - Pada dataset tersebut terdapat 8763 data
 
 ### Exploratory Data Analysis (EDA) - Univariate Analysis
-- **Distribusi Kelas**:
-       - ![alt text](?raw=true)
+- **Categorical**:
+       ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical1.png?raw=true)
+       ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical2.png?raw=true)
+       ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical3.png.png?raw=true)
+  
+- **Numerical**:
+     ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical1.png?raw=true)
+     ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical2.png?raw=true)
+     ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical3.png?raw=true)
+
+### Exploratory Data Analysis (EDA) - Multivariate Analysis
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis1.png?raw=true)
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis2.png?raw=true)
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis3.png?raw=true)
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis4.png?raw=true)
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis5.png?raw=true)
+
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/scatterplot.png?raw=true)
+
+
 
 ## Data Preparation
 ### Data Cleaning
-- **Text Cleaning**: Menghapus tanda baca, angka, dan kata-kata tidak relevan (stopwords) menggunakan NLTK.
-- **Stemming**: Menggunakan PorterStemmer untuk mengubah kata ke bentuk dasar (misalnya, "running" menjadi "run").
-- **TF-IDF Vectorization**: Mengubah teks gejala menjadi vektor numerik untuk diproses model.
-- **Label Encoding**: Mengubah label penyakit menjadi format numerik.
+- df.isnull().sum() = tidak ada data null
+- df_cleaned = df_group.drop_duplicates() = tidak ada data duplikat
 
-### Data Splitting
-- Data dibagi menjadi 80% data latih dan 20% data uji menggunakan `train_test_split`.
+  def detect_outliers_iqr(data):
+       outlier_info = {}
+          for column in data.select_dtypes(include=['int64', 'float64']).columns:
+              Q1 = data[column].quantile(0.25)
+              Q3 = data[column].quantile(0.75)
+              IQR = Q3 - Q1
 
-### Normalisasi
-- Fitur numerik (panjang teks dan jumlah kata) dinormalisasi menggunakan `MinMaxScaler` untuk menyeragamkan skala.
-
-![Pipeline](images/pipeline.png)
-
-## Modeling
-### 1. Algoritma Support Vector Machine (SVM)
-- **Kelebihan**: Efektif untuk data berdimensi tinggi seperti TF-IDF, robust terhadap noise.
-- **Kekurangan**: Sensitif terhadap pemilihan kernel dan risiko overfitting pada data kompleks.
-- **Parameter**: Menggunakan kernel linear dengan tuning Optuna (C=1.0).
-- **Akurasi**: 98.5% (terbaik setelah tuning, dipilih untuk menghindari overfitting dibandingkan skor 100%).
-
-### 2. Algoritma Logistic Regression
-- **Kelebihan**: Sederhana, interpretable, cocok untuk data linear.
-- **Kekurangan**: Kurang efektif pada hubungan non-linear.
-- **Parameter**: Tuning dengan Optuna untuk parameter C.
-- **Akurasi**: 98.1%.
-
-### 3. Algoritma Multinomial Naive Bayes
-- **Kelebihan**: Cepat, cocok untuk data teks.
-- **Kekurangan**: Mengasumsikan independensi fitur, kurang akurat pada gejala tumpang tindih.
-- **Akurasi**: 93%.
-
-### 4. Algoritma XGBoost
-- **Kelebihan**: Kuat menangani data kompleks, mendukung regularisasi.
-- **Kekurangan**: Rentan terhadap kesalahan silang antar kelas.
-- **Akurasi**: 91%.
-
-### Pemilihan Model Terbaik
-SVM dengan tuning Optuna dipilih karena:
-- Akurasi tertinggi (98.5%).
-- Konsistensi tinggi di semua kelas.
-- Minim kesalahan pada penyakit penting seperti diabetes dan psoriasis.
-
-![Perbandingan Akurasi Model](images/perbandingan-akurasi-model.png)
-
-## Evaluation
-### Metrik Evaluasi
-- **Confusion Matrix**:
-
-  ![Confussion Matrix](images/confussion-matrix.png)
-
-  menunjukkan klasifikasi sempurna pada 21 dari 24 penyakit.
+              lower_bound = Q1 - 1.5 * IQR
+              upper_bound = Q3 + 1.5 * IQR
 
   
-- **Classification Report**:
+              outliers = data[(data[column] < lower_bound) | (data[column] > upper_bound)]
+              outlier_count = outliers.shape[0]
 
-  ![Classification Report](images/classification-report.png)
+              if outlier_count > 0:
+                  outlier_info[column] = outlier_count
 
-  menunjukkan precision, recall, dan F1-score rata-rata 98.32% untuk SVM.
-- **Cross-Validation**: Akurasi rata-rata SVM sebesar 98.23% pada 5-fold cross-validation.
+    return outlier_info
+  
+        = Tidak ada outlier
 
-### Studi Kasus
-- **Input Gejala**: "increased thirst and hunger, frequent urination, unexplained weight loss, blurred vision, slow healing wounds".
-- **Prediksi**: Diabetes (sesuai label aktual).
-- **Interpretasi**: Sistem berhasil mengenali pola gejala diabetes dengan akurat, menunjukkan potensi sebagai alat bantu diagnosis awal.
 
-### Kelemahan
-- Model seperti Naive Bayes dan XGBoost kesulitan membedakan penyakit dengan gejala mirip (misalnya, drug reaction vs. GERD).
-- Hasil prediksi harus divalidasi oleh profesional medis.
+### Data Splitting
+- 80% digunakan sebagai data latih (training data) untuk membangun model
 
-## Kesimpulan
-1. **Sistem Klasifikasi**: Sistem NLP berbasis SVM mampu memprediksi penyakit dengan akurasi 98.5% berdasarkan gejala teks.
-2. **Algoritma Terbaik**: SVM dengan tuning Optuna memberikan keseimbangan terbaik antara akurasi dan generalisasi.
-3. **Dampak Klinis**: Sistem ini sangat potensial untuk diagnosis awal di lingkungan dengan sumber daya terbatas, tetapi tidak menggantikan dokter.
+- 20% sisanya digunakan sebagai data uji (testing data) untuk mengevaluasi kinerja model.
 
+
+## Modeling
+### 1. Algoritma Random Forest Classifier
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/RandomForestClassification.png?raw=true)
+
+
+### 2. Algoritma Decision Tree
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/DecisionTree.png?raw=true)
+
+   
+   Insight : 
+   
+      - Dari modelling yang kita lakukan kita melakukan modelling Algoritma Random Forest Classifier dan Decision Tree
+      - Pada Random Forest memiliki akurasi sebesar 0.64 dan Decision Tree memiliki akurasi sebesar 0.55, yang mana ini menjelaskan bahwa akurasi Random Forest lebih besar dibandingkan dengan Decision Tree
+
+## Evaluasi dan Pemilihan Model
+### Perbandingan Akurasi
+   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/PerbandinganAkurasi.png?raw=true)
+   
+   Berdasarkan hasil perbandingan akurasi antara model Random Forest dan Decision Tree yang telah diterapkan teknik SMOTE, dapat disimpulkan bahwa model Random Forest memiliki akurasi yang lebih tinggi sebesar      63,55% dibandingkan dengan Decision Tree yang hanya mencapai 54,71%. Hal ini menunjukkan bahwa Random Forest lebih baik dalam memprediksi secara keseluruhan tetapi hasil tidak bagus dikarenakan dataset tidak     bagus. 
+
+
+
+## Menjawab Problem 
+1. Apakah jenis kelamin, merokok, obesitas, diet dan Riwayat Penyakit Keluarga dapat menimbulkan penyakit serangan jantung?
+   
+      Berdasarkan Countplot yang ada di bagian EDA - Multivariate Analysis dapat kita lihat berdasarkan grafik distribusi, jenis kelamin menunjukkan adanya kecenderungan bahwa laki-laki memiliki risiko serangan jantung yang lebih tinggi dibandingkan perempuan. Hal ini terlihat dari jumlah kasus risiko tinggi yang lebih dominan pada kelompok laki-laki. Selanjutnya, kebiasaan merokok juga memperlihatkan pola yang jelas, di mana individu yang merokok memiliki proporsi risiko serangan jantung yang lebih tinggi daripada yang tidak merokok, mendukung pemahaman bahwa merokok merupakan faktor risiko utama penyakit jantung.
+
+      Obesitas menjadi faktor signifikan lainnya. Individu yang tergolong obesitas menunjukkan jumlah kasus serangan jantung yang lebih banyak, menunjukkan bahwa kelebihan berat badan dapat berkontribusi pada peningkatan tekanan darah, kolesterol, dan risiko komplikasi kardiovaskular lainnya. Dari segi pola makan, orang dengan diet yang tidak sehat juga cenderung memiliki risiko serangan jantung lebih tinggi, yang menunjukkan pentingnya menjaga asupan makanan dalam menjaga kesehatan jantung. Terakhir, riwayat penyakit jantung dalam keluarga juga memberikan kontribusi signifikan, di mana individu yang memiliki anggota keluarga dengan riwayat serangan jantung memiliki kecenderungan lebih besar untuk mengalami hal yang sama. Ini mengindikasikan adanya pengaruh genetik atau keturunan terhadap risiko penyakit jantung.
+
+3. Apakah ada hubungan yang signifikan antara usia dan risiko serangan jantung?
+     Pada bagian Exploratory Data Analysis (EDA) pada bagian analisis multivariat menggunakan scatterplot dapat diamati bahwa risiko serangan jantung menunjukkan tren peningkatan seiring bertambahnya usia. Pola ini semakin nyata terlihat pada kelompok usia di atas 50 tahun, di mana titik-titik yang merepresentasikan individu dengan risiko tinggi semakin padat. Hal ini menunjukkan bahwa usia merupakan salah satu faktor penting yang berkontribusi terhadap peningkatan risiko kardiovaskular. Seiring bertambahnya usia, terjadi penurunan elastisitas pembuluh darah, peningkatan tekanan darah, serta akumulasi plak pada arteri yang dapat memicu serangan jantung. Oleh karena itu, deteksi dini dan intervensi gaya hidup sehat menjadi sangat penting, terutama bagi individu yang memasuki usia paruh baya dan lansia.
+   
+4. Pada rentang usia berapa risiko serangan jantung paling tinggi muncul?
+      Dalam tahap Exploratory Data Analysis (EDA), khususnya pada analisis multivariat yang divisualisasikan melalui scatterplot, tampak bahwa individu dalam rentang usia 50 hingga 70 tahun mendominasi area    dengan titik-titik berwarna oranye, yang merepresentasikan risiko serangan jantung yang tinggi. Hal ini menunjukkan bahwa sebagian besar kasus serangan jantung dalam dataset terjadi pada kelompok usia tersebut. Kepadatan titik-titik pada usia 50–70 mencerminkan bahwa risiko kardiovaskular cenderung meningkat secara signifikan seiring bertambahnya usia.
+   
 ## Referensi
-1. Dessi, D., Helaoui, R., Kumar, V., Recupero, D. R., & Riboni, D. (2021). TF-IDF vs word embeddings for morbidity identification in clinical notes: An initial study. *arXiv*. https://arxiv.org/abs/2105.09632
-2. Kalra, S., Li, L., & Tizhoosh, H. R. (2019). Automatic classification of pathology reports using TF-IDF features. *arXiv*. https://arxiv.org/abs/1903.07406
-3. Lai, L.-H., Lin, Y.-L., Liu, Y.-H., Lai, J.-P., Yang, W.-C., Hou, H.-P., & Pai, P.-F. (2024). The use of machine learning models with Optuna in disease prediction. *Electronics, 13*(23), 4775. https://doi.org/10.3390/electronics13234775
-4. Rudd, J. M. (2017). Application of support vector machine modeling and graph theory metrics for disease classification. *arXiv*. https://arxiv.org/abs/1708.00122
+1. American Society for Preventive Cardiology. (2022). Ten things to know about ten cardiovascular disease risk factors. American Journal of Preventive Cardiology, 2(2), 100026.
+2. Iskandar, I., Hadi, A., & Alfridsyah, A. (2017). Faktor Risiko Terjadinya Penyakit Jantung Koroner pada Pasien Rumah Sakit Umum Meuraxa Banda Aceh. AcTion: Aceh Nutrition Journal, 2(1), 32.
+3. Karyatin, K. (2019). Faktor-Faktor Yang Berhubungan Dengan Kejadian Penyakit Jantung Koroner. Jurnal Ilmiah Kesehatan, 11(1), 37-43.
