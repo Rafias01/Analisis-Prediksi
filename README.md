@@ -37,7 +37,7 @@ Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iams
 
 ### Exploratory Data Analysis (EDA) - Univariate Analysis
 - **Distribusi Kelas**:
-       - ![Visualisasi Univariate_Categorical](Univariate_Categorical1.png) menunjukkan distribusi kelas yang cukup seimbang.
+       - ![alt text](?raw=true)
 
 ## Data Preparation
 ### Data Cleaning
