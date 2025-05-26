@@ -35,10 +35,9 @@ Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iams
 - Pada dataset tersebut dapat dilihat bahwa terdapat 26 kolom
 - Pada dataset tersebut terdapat 8763 data
 
-### Exploratory Data Analysis (EDA)
-- **Distribusi Kelas**: ![Label Penyakit](images/gambar-distribusi-label-penyakit.png) menunjukkan distribusi kelas yang cukup seimbang.
-- **Analisis Gejala**: ![Wordcloud Gejala](images/gambar-word-cloud-gejala.png) menunjukkan kata-kata kunci seperti "skin", "lotfeel", dan "experience" yang sering muncul.
-- **Jumlah Kelas**: 24 penyakit unik diidentifikasi, dengan beberapa penyakit memiliki gejala tumpang tindih (misalnya, GERD dan Peptic Ulcer).
+### Exploratory Data Analysis (EDA) - Univariate Analysis
+- **Distribusi Kelas**:
+       - ![Visualisasi Univariate_Categorical](Univariate_Analysis1.png) menunjukkan distribusi kelas yang cukup seimbang.
 
 ## Data Preparation
 ### Data Cleaning
