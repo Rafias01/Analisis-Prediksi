@@ -66,6 +66,10 @@ Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
 | Heart Attack Risk        | Label target/variabel dependen (0 = risiko rendah, 1 = risiko tinggi).                                                           |
 
 
+![image](https://github.com/user-attachments/assets/c2bf01db-c0c3-4e8e-8f9e-e58b3cde90a1)
+
+
+Selanjutnya saya menghapus kolom-kolom yang dianggap tidak relevan, tidak berguna, atau berisiko mengganggu proses analisis dan pemodelan, sehingga dataset menjadi lebih fokus dan efisien untuk digunakan pada tahap berikutnya seperti eksplorasi data atau pelatihan model.
   
 
 ### Exploratory Data Analysis (EDA) - Univariate Analysis
@@ -73,11 +77,41 @@ Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
        ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical1.png?raw=true)
        ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical2.png?raw=true)
        ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical3.png?raw=true)
-  
+
+Gambar di atas dapat diinterpretasikan sebagai berikut : 
+1. Pada countplot jumlah berdasarkan **Sex** menunjukkan bahwa jumlah narasumber pria lebih besar dibandingkan dengan wanita.
+2. Pada countplot jumlah berdasarkan **Diabetes** menunjukkan bahwa mayoritas narasumber mengidap penyakit diabetes.
+3. Pada countplot jumlah berdasarkan **Family History** menunjukkan bahwa jumlah narasumber yang memiliki keluarga pengidap penyakit serangan jantung lebih sedikit dibandingkan narasumber yang memiliki keluarga pengidap penyakit serangan jantung.
+4. Pada countplot jumlah berdasarkan **Smoking** menunjukkan bahwa jumlah narasumber yang merokok lebih banyak dibandingkan dengan yang tidak merokok.
+5. Pada countplot jumlah berdasarkan **Diet** menunjukkan bahwa jumlah narasumber yang melakukan diet sehat, normal dan tidak sehat relatif sama jumlahnya.
+6. Pada countplot jumlah berdasarkan **Alcohol Consumption** menunjukkan bahwa jumlah narasumber yang mengkonsumsi alkohol lebih banyak dibandingkan dengan yang tidak mengkonsumsi alkohol.
+7. Pada countplot jumlah berdasarkan **Previous Heart Problems** menunjukkan bahwa jumlah narasumber yang pernah terkena dengan penyakit jantung lebih sedikit dibandingkan yang belum pernah terkena penyakit jantung.
+8. Pada countplot jumlah berdasarkan **Obesity** menunjukkan bahwa jumlah narasumber yang obesitas relatif sama jumlahnya dengan yang tidak obesitas.
+9. Pada countplot jumlah berdasarkan **Medication Use** menunjukkan bahwa jumlah narasumber yang menggunakan obat relatif sama dibandingkan dengan yang tidak menggunakan obat.
+10. Pada countplot jumlah berdasarkan **Heart Attack Risk** menunjukkan bahwa jumlah narasumber yang Beresiko terkena penyakit jantung lebih sedikit dibandingkan dengan yang tidak beresiko terkena penyakit jantung
+    
 - **Numerical**:
-     ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical1.png?raw=true)
-     ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical2.png?raw=true)
-     ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical3.png?raw=true)
+  
+  ![image](https://github.com/user-attachments/assets/4a128b9b-9a2e-4a9a-92f0-a4347bf3851d)
+  
+  ![image](https://github.com/user-attachments/assets/45cc5fe1-cf27-42ae-bd6e-1de92db40923)
+  
+  ![image](https://github.com/user-attachments/assets/70bbf608-c910-4c7d-9e1f-2832e7e9a926)
+  
+  ![image](https://github.com/user-attachments/assets/4c149ee6-08ac-4d18-bc0e-f4ccf71094b8)
+
+Gambar di atas dapat diinterpretasikan sebagai berikut.
+1. Histogram **Age** memperlihatkan penyebaran usia yang cukup merata tanpa dominasi kelompok usia tertentu, mencerminkan bahwa data mencakup individu dari usia muda hingga lanjut usia secara proporsional.
+2.Distribusi **Cholesterol** terlihat agak menyebar rata namun sedikit condong ke kanan, mengisyaratkan adanya kecenderungan sebagian individu memiliki kadar kolesterol lebih tinggi dari rata-rata.
+3. Pola distribusi pada **Heart Rate** menunjukkan keragaman yang cukup seimbang, tanpa ada nilai tertentu yang mendominasi, menandakan variasi detak jantung yang luas antar individu.
+4. Untuk **Exercise Hours Per Week**, histogram menunjukkan distribusi yang cenderung rata, menandakan bahwa partisipan memiliki kebiasaan olahraga yang bervariasi dari sangat sedikit hingga cukup intens.
+5. Histogram **Stress Level** menggambarkan distribusi yang hampir datar, menunjukkan bahwa responden tersebar secara seimbang di seluruh tingkat stres dari yang paling rendah hingga tertinggi.
+6.Distribusi **Sedentary Hours Per Day** menunjukkan variasi yang lebar dan cukup merata, mengindikasikan bahwa durasi aktivitas duduk atau tidak bergerak sangat beragam dalam populasi ini.
+7. Pada histogram **BMI**, terlihat distribusi yang cukup simetris dengan sedikit penumpukan pada rentang 23–27, yang mengindikasikan banyak individu berada dalam kisaran berat badan ideal.
+8. **Triglycerides** memperlihatkan distribusi data yang merata dari nilai terendah hingga tertinggi, menunjukkan keberagaman kadar trigliserida yang signifikan di antara individu.
+9. Untuk **Physical Activity Days Per Week**, penyebarannya relatif seimbang dari 0 hingga 7 hari, meskipun ada kecenderungan lebih banyak individu yang beraktivitas fisik sekitar 3 hari per minggu.
+10. **Sleep Hours Per Day** memperlihatkan sebaran yang stabil dan merata antara 4 hingga 10 jam per hari, mencerminkan variasi pola tidur yang umum ditemui dalam populasi.
+
 
 ### Exploratory Data Analysis (EDA) - Multivariate Analysis
    ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis1.png?raw=true)
@@ -86,36 +120,39 @@ Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
    ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis4.png?raw=true)
    ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/multivariate_analysis5.png?raw=true)
 
+**Insight:**
+1. Proporsi laki-laki yang memiliki risiko serangan jantung tinggi terlihat lebih banyak dibanding perempuan yang mana ini mengindikasikan bahwa jenis kelamin laki-laki mungkin menjadi faktor yang berkontribusi terhadap peningkatan risiko serangan jantung.
+
+2. Individu yang memiliki kebiasaan merokok cenderung memiliki frekuensi lebih tinggi pada kategori risiko tinggi serangan jantung dibandingkan dengan non-perokok.
+
+3. Individu yang mengalami obesitas terlihat memiliki jumlah risiko yang lebih tinggi terkena serangan jantung dibandingkan dengan Individu yang tidak obesitas.
+
+4. Mereka dengan pola makan tidak sehat (Unhealthy) memiliki proporsi yang lebih besar dalam kategori risiko tinggi dibandingkan mereka yang memiliki pola makan sehat.
+
+5. Individu yang memiliki riwayat serangan jantung dalam keluarga cenderung atau memiliki risiko yang lebih tinggi terkena serangan jantung dibandingkan dengan yang tidak memiliki riwayat keluarga terkena penyakit serangan jantung
+
+   
    ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/scatterplot.png?raw=true)
-
-
+   
+**Insight:**
+1. Pada ScatterPlot tersebut dapat dilihat bahwa pria usia 50 tahun ke atas dengan kolesterol tinggi lebih banyak mengalami risiko serangan jantung.
+2. Risiko serangan jantung tidak terbatas pada usia tua atau kolesterol tinggi, serangan jantung bisa muncul di segala usia dan level kolesterol.
+3. Faktor jenis kelamin mungkin memengaruhi risiko, dengan pria menunjukkan lebih banyak kasus terkena serangan jantung.
+   
 
 ## Data Preparation
 ### Data Cleaning
-- df.isnull().sum() = tidak ada data null
-- df_cleaned = df_group.drop_duplicates() = tidak ada data duplikat
+![image](https://github.com/user-attachments/assets/192ec309-00e3-46e1-91aa-018a7ffbe128)
 
-  def detect_outliers_iqr(data):
-       outlier_info = {}
-          for column in data.select_dtypes(include=['int64', 'float64']).columns:
-              Q1 = data[column].quantile(0.25)
-              Q3 = data[column].quantile(0.75)
-              IQR = Q3 - Q1
+   Gambar tersebut menunjukkan hasil dari pengecekan data kosong (missing values) pada sebuah DataFrame. Hasil yang ditampilkan menunjukkan bahwa tidak ada nilai kosong (missing values) di seluruh kolom. Yang artinya seluruh baris pada semua kolom memiliki data lengkap.
 
-              lower_bound = Q1 - 1.5 * IQR
-              upper_bound = Q3 + 1.5 * IQR
+![image](https://github.com/user-attachments/assets/73e34506-30ed-4edf-b6e1-79762350c8cf)
 
-  
-              outliers = data[(data[column] < lower_bound) | (data[column] > upper_bound)]
-              outlier_count = outliers.shape[0]
+Gambar tersebut memperlihatkan proses pembersihan data yang duplikan dan juga selanjutnya terdapat proses pendeteksian outlier pada dataset menggunakan metode Interquartile Range (IQR). Proses ini dilakukan dengan mendefinisikan fungsi detect_outliers_iqr(data) yang secara khusus ditujukan untuk mengevaluasi setiap kolom numerik dalam DataFrame. Fungsi ini hanya bekerja pada kolom dengan tipe data int64 dan float64, yang biasanya merepresentasikan data kuantitatif seperti umur, kadar kolesterol, denyut jantung, dan sebagainya.
 
-              if outlier_count > 0:
-                  outlier_info[column] = outlier_count
+Di dalam fungsi, langkah pertama adalah menghitung nilai kuartil pertama (Q1) dan kuartil ketiga (Q3) dari setiap kolom numerik. Selisih antara Q3 dan Q1 disebut sebagai IQR (Interquartile Range), yang mewakili rentang nilai tengah dari data. Berdasarkan IQR ini, ditentukan batas bawah dan batas atas untuk nilai normal. Nilai-nilai yang berada di luar rentang tersebut—lebih kecil dari Q1 - 1.5 × IQR atau lebih besar dari Q3 + 1.5 × IQR—dianggap sebagai outlier atau pencilan.
 
-    return outlier_info
-  
-        = Tidak ada outlier
-
+Setelah menentukan batas tersebut, fungsi mencari data yang termasuk ke dalam kategori outlier dan menghitung jumlahnya pada setiap kolom. Jika ditemukan outlier, jumlahnya dicatat dalam sebuah dictionary outlier_info yang berisi nama kolom dan jumlah outlier pada kolom tersebut. Namun, dalam kasus yang ditampilkan pada gambar, hasil pemeriksaan menunjukkan bahwa tidak ada kolom yang mengandung outlier, yang ditandai dengan output: "Tidak ditemukan outlier di dataset."
 
 ### Data Splitting
 - 80% digunakan sebagai data latih (training data) untuk membangun model
