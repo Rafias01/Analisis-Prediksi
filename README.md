@@ -34,6 +34,39 @@ Metrik yang digunakan untuk mengevaluasi seberapa baik model klasifikasi merupak
 Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iamsouravbanerjee/heart-attack-prediction-dataset)). Dataset ini berisi 1200 entri dengan dua kolom utama:
 - Pada dataset tersebut dapat dilihat bahwa terdapat 26 kolom
 - Pada dataset tersebut terdapat 8763 data
+Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
+
+| Nama Kolom               | Deskripsi                                                                                                                        |
+|-------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| Patient ID               | identitas unik dari masing-masing pasien yang mana masing-masing pasien memiliki Patient ID yang berbeda-beda                    |
+| Age                      | Usia dari masing-masing pasien                                                                                                   |
+| Sex                      | Jenis kelamin pasien. Masing-masing terdiri dari Male (Laki-laki) dan Female (Perempuan)                                         |
+| Cholesterol              | Banyaknya lemak dalam darah dalam satuan mg/dl yang mana cholesterol itu mempengaruhi apakah seseorang berpotentsi terkena                                         serangan jantung atau tidak                                                                                                      |
+| Blood Pressure           | Blood pressure adalah tekanan yang diberikan darah terhadap dinding arteri saat jantung memompa dan beristirahat.                |
+| Heart Rate               | Heart rate adalah jumlah detak jantung per menit yang menunjukkan seberapa cepat jantung bekerja.|
+| Diabetes                 | Mengungkapkan apakah pasien mengidap diabetes dengan keterangan 1 dan 0 (1 = Ya, 0 Tidak)                                        |
+| Family History           | Menyatakan apakah pasien memiliki riwayat keluarga yang mengidap penyakit serangan jantung dengan keterangan 1 dan 0 (1 = Ya, 0 Tidak)                                                                                                                                                        |
+| Smoking                  | Menyatakan apakah pasien merokok atau tidak dengan keterangan 1 dan 0 (1 = Ya, 0 Tidak)                                          |
+| Obesity                  |  Menyatakan apakah pasien obesitas atau tidak dengan keterangan 1 dan 0 (1 = Ya, 0 Tidak). Obesitas berpengaruh pada kesehatan                                      jantung                                                                                                                         |
+| Alcohol Consumption      | Menyatakan apakah pengguna mengonsumsi alkohol atau tidak ('yes' atau 'no'). Ini merupakan salah satu faktor seseorang terkena                                     serangan jantung                                                                                                                 |
+| Exercise Hours Per Week  | Jumlah waktu yang dihabiskan untuk melakukan olahraga dalam seminggu dalam satuan jam                                            |
+| Diet                     | Diet atau pola makan seseorang yang dilakukan oleh seseorang dengan kriteria Health, Average dan Unhealthy                       |
+| Previous Heart Problems  | Menyatakan apakah seseorang pernah terkena penyakit jantung sebelumnya dengan keterangan 1 dan 0 (1 = Ya, 0 Tidak).|
+| Medication Use           | Penggunaan obat secara rutin (0 = tidak, 1 = ya). Bisa menunjukkan bahwa individu sedang dalam pengobatan untuk kondisi tertentu                                   seperti serangan jantung atau yang lainnya                                                                                       |
+| Stress Level             | Tingkat stres  dalam skala (1–10). Stres kronis meningkatkan tekanan darah dan risiko penyakit jantung.                          |
+| Sedentary Hours Per Day  | Jumlah jam duduk atau tidak aktif per hari. Gaya hidup sedentari adalah faktor risiko bagi penyakit jantung.                     |
+| Income                   | Pendapatan tahunan. Keterangan ini dipakai untuk analisis bisnis                                                                 |
+| BMI                      | Body Mass Index, dihitung dari berat badan dan tinggi badan. BMI tinggi menandakan obesitas yang mana salah satu faktor serangan                                   jantung                                                                                                                          |
+| Triglycerides            | Kadar trigliserida (lemak) dalam darah (mg/dL). Kadar tinggi dikaitkan dengan peningkatan risiko penyakit serangan jantung.      |
+| Physical Activity Days Per Week | Jumlah hari dalam seminggu individu berolahraga atau aktif secara fisik. Lebih banyak hari aktif biasanya berarti risiko                                           kesehatan yang lebih rendah.                                                                                              |
+| Sleep Hours Per Day      | Rata-rata jam tidur per hari. Kualitas dan durasi tidur memengaruhi tekanan darah, kadar hormon, dan kesehatan jantung secara                                      keseluruhan.                                                                                                                     |
+| Country                  | Negara pasien tinggal ini diperlukan untuk identitas pasien                                                                      |
+| Continent                | Benua asal pasien. Ini berguna untuk agregasi data dalam cakupan geografis lebih luas.                                           |
+| Hemisphere               | Belahan bumi dimana pasien tinggal. Yang mana terdiri dari Northern Hemisphere dan Southern Hemisphere                           |
+| Heart Attack Risk        | Label target/variabel dependen (0 = risiko rendah, 1 = risiko tinggi).                                                           |
+
+
+  
 
 ### Exploratory Data Analysis (EDA) - Univariate Analysis
 - **Categorical**:
