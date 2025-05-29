@@ -39,7 +39,7 @@ Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iams
 - **Categorical**:
        ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical1.png?raw=true)
        ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical2.png?raw=true)
-       ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical3.png.png?raw=true)
+       ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical3.png?raw=true)
   
 - **Numerical**:
      ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Numerical1.png?raw=true)
