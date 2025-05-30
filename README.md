@@ -219,9 +219,7 @@ Decision Tree adalah salah satu algoritma pembelajaran mesin yang paling sederha
 ### Perbandingan Akurasi
    ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/PerbandinganAkurasi.png?raw=true)
    
-   Berdasarkan hasil perbandingan akurasi antara model Random Forest dan Decision Tree yang telah diterapkan teknik SMOTE, dapat disimpulkan bahwa model Random Forest memiliki akurasi yang lebih tinggi sebesar      63,55% dibandingkan dengan Decision Tree yang hanya mencapai 54,71%. Hal ini menunjukkan bahwa Random Forest lebih baik dalam memprediksi secara keseluruhan tetapi hasil tidak bagus dikarenakan dataset tidak     bagus. 
-
-
+   Berdasarkan hasil perbandingan akurasi antara model Random Forest dan Decision Tree yang telah diterapkan teknik SMOTE, dapat disimpulkan bahwa model Random Forest memiliki akurasi yang lebih tinggi sebesar 63,55% dibandingkan dengan Decision Tree yang hanya mencapai 54,71%. Hal ini menunjukkan bahwa Random Forest lebih baik dalam memprediksi secara keseluruhan tetapi hasil tidak bagus dikarenakan dataset tidak bagus. Secara umum, dalam skenario klasifikasi yang berkaitan dengan deteksi penyakit serius seperti serangan jantung, kemampuan model untuk mengidentifikasi kelas minoritas (recall) menjadi lebih penting daripada hanya mengejar akurasi. Oleh karena itu, meskipun akurasinya lebih rendah, Decision Tree lebih layak dipertimbangkan karena memberikan hasil yang lebih seimbang dan sensitif terhadap pasien yang benar-benar berisiko. 
 
 ## Menjawab Problem 
 1. Apakah jenis kelamin, merokok, obesitas, diet dan Riwayat Penyakit Keluarga dapat menimbulkan penyakit serangan jantung?
