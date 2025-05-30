@@ -101,16 +101,16 @@ Gambar di atas dapat diinterpretasikan sebagai berikut :
   ![image](https://github.com/user-attachments/assets/4c149ee6-08ac-4d18-bc0e-f4ccf71094b8)
 
 Gambar di atas dapat diinterpretasikan sebagai berikut.
-1. Histogram **Age** memperlihatkan penyebaran usia yang cukup merata tanpa dominasi kelompok usia tertentu, mencerminkan bahwa data mencakup individu dari usia muda hingga lanjut usia secara proporsional.
-2.Distribusi **Cholesterol** terlihat agak menyebar rata namun sedikit condong ke kanan, mengisyaratkan adanya kecenderungan sebagian individu memiliki kadar kolesterol lebih tinggi dari rata-rata.
-3. Pola distribusi pada **Heart Rate** menunjukkan keragaman yang cukup seimbang, tanpa ada nilai tertentu yang mendominasi, menandakan variasi detak jantung yang luas antar individu.
-4. Untuk **Exercise Hours Per Week**, histogram menunjukkan distribusi yang cenderung rata, menandakan bahwa partisipan memiliki kebiasaan olahraga yang bervariasi dari sangat sedikit hingga cukup intens.
+1. Histogram **Age** memperlihatkan penyebaran usia yang cukup merata tanpa dominasi kelompok usia tertentu, mencerminkan bahwa data mencakup individu dari usia muda hingga lanjut usia secara proporsional. 
+2. Distribusi **Cholesterol** terlihat agak menyebar rata namun sedikit condong ke kanan, mengisyaratkan adanya kecenderungan sebagian individu memiliki kadar kolesterol lebih tinggi dari rata-rata.
+3. Pola distribusi pada **Heart Rate** menunjukkan keragaman yang cukup seimbang, tanpa ada nilai tertentu yang mendominasi, menandakan variasi detak jantung yang luas antar individu.  
+4. Untuk **Exercise Hours Per Week**, histogram menunjukkan distribusi yang cenderung rata, menandakan bahwa partisipan memiliki kebiasaan olahraga yang bervariasi dari sangat sedikit hingga cukup intens. 
 5. Histogram **Stress Level** menggambarkan distribusi yang hampir datar, menunjukkan bahwa responden tersebar secara seimbang di seluruh tingkat stres dari yang paling rendah hingga tertinggi.
-6.Distribusi **Sedentary Hours Per Day** menunjukkan variasi yang lebar dan cukup merata, mengindikasikan bahwa durasi aktivitas duduk atau tidak bergerak sangat beragam dalam populasi ini.
+6. Distribusi **Sedentary Hours Per Day** menunjukkan variasi yang lebar dan cukup merata, mengindikasikan bahwa durasi aktivitas duduk atau tidak bergerak sangat beragam dalam populasi ini.
 7. Pada histogram **BMI**, terlihat distribusi yang cukup simetris dengan sedikit penumpukan pada rentang 23–27, yang mengindikasikan banyak individu berada dalam kisaran berat badan ideal.
-8. **Triglycerides** memperlihatkan distribusi data yang merata dari nilai terendah hingga tertinggi, menunjukkan keberagaman kadar trigliserida yang signifikan di antara individu.
-9. Untuk **Physical Activity Days Per Week**, penyebarannya relatif seimbang dari 0 hingga 7 hari, meskipun ada kecenderungan lebih banyak individu yang beraktivitas fisik sekitar 3 hari per minggu.
-10. **Sleep Hours Per Day** memperlihatkan sebaran yang stabil dan merata antara 4 hingga 10 jam per hari, mencerminkan variasi pola tidur yang umum ditemui dalam populasi.
+9. **Triglycerides** memperlihatkan distribusi data yang merata dari nilai terendah hingga tertinggi, menunjukkan keberagaman kadar trigliserida yang signifikan di antara individu.
+10. Untuk **Physical Activity Days Per Week**, penyebarannya relatif seimbang dari 0 hingga 7 hari, meskipun ada kecenderungan lebih banyak individu yang beraktivitas fisik sekitar 3 hari per minggu.
+11. **Sleep Hours Per Day** memperlihatkan sebaran yang stabil dan merata antara 4 hingga 10 jam per hari, mencerminkan variasi pola tidur yang umum ditemui dalam populasi.
 
 
 ### Exploratory Data Analysis (EDA) - Multivariate Analysis
@@ -155,26 +155,67 @@ Di dalam fungsi, langkah pertama adalah menghitung nilai kuartil pertama (Q1) da
 Setelah menentukan batas tersebut, fungsi mencari data yang termasuk ke dalam kategori outlier dan menghitung jumlahnya pada setiap kolom. Jika ditemukan outlier, jumlahnya dicatat dalam sebuah dictionary outlier_info yang berisi nama kolom dan jumlah outlier pada kolom tersebut. Namun, dalam kasus yang ditampilkan pada gambar, hasil pemeriksaan menunjukkan bahwa tidak ada kolom yang mengandung outlier, yang ditandai dengan output: "Tidak ditemukan outlier di dataset."
 
 ### Data Splitting
+![image](https://github.com/user-attachments/assets/a56dd698-98b8-4df8-8cb5-2a136636b8a5)
+
 - 80% digunakan sebagai data latih (training data) untuk membangun model
 
 - 20% sisanya digunakan sebagai data uji (testing data) untuk mengevaluasi kinerja model.
 
 
-## Modeling
+## Modelling
 ### 1. Algoritma Random Forest Classifier
-   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/RandomForestClassification.png?raw=true)
 
+Random Forest Classifier adalah salah satu algoritma pembelajaran mesin yang termasuk dalam metode ensemble learning, yang bertujuan untuk meningkatkan akurasi dan kestabilan model dengan menggabungkan prediksi dari banyak model sederhana. Dalam hal ini, Random Forest terdiri dari sejumlah pohon keputusan yang dibangun secara acak. Saat melakukan klasifikasi, setiap pohon memberikan suara (voting) untuk kelas tertentu, dan hasil akhir ditentukan berdasarkan mayoritas suara dari semua pohon tersebut. Terdapat beberapa parameter yang digunakan yaitu : 
 
+- **random_state=42** : Parameter ini digunakan untuk memastikan bahwa proses pembentukan model bersifat konsisten dan dapat direproduksi. Parametir Ini penting karena Random Forest melibatkan proses acak, seperti pemilihan data secara acak untuk masing-masing pohon dan pemilihan subset fitur saat melakukan pemisahan cabang. Dengan menetapkan nilai random state, pengguna bisa mendapatkan hasil yang sama setiap kali kode dijalankan.
+- **class_weight='balanced'** : Parameter ini  digunakan untuk menangani masalah data yang tidak seimbang (imbalanced dataset), yaitu kondisi ketika satu kelas memiliki jumlah data yang jauh lebih sedikit dibandingkan kelas lainnya. Dengan menggunakan pengaturan ini, model secara otomatis menghitung bobot untuk setiap kelas berdasarkan proporsi datanya di dalam data pelatihan. Bobot ini kemudian digunakan selama pelatihan agar kesalahan pada kelas minoritas mendapat penalti yang lebih besar, sehingga model terdorong untuk lebih memperhatikan kelas tersebut.
+  
 ### 2. Algoritma Decision Tree
-   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/DecisionTree.png?raw=true)
+Decision Tree adalah salah satu algoritma pembelajaran mesin yang paling sederhana dan mudah dipahami, digunakan untuk tugas klasifikasi maupun regresi. Secara konseptual, decision tree bekerja dengan cara memecah dataset menjadi subset-subset yang lebih kecil berdasarkan fitur-fitur tertentu, hingga mencapai kondisi di mana data dalam suatu cabang cukup “murni” atau homogen. Struktur pohon dimulai dari simpul akar (root node), kemudian bercabang melalui simpul-simpul internal yang merepresentasikan keputusan berdasarkan nilai suatu fitur, dan berakhir pada simpul daun (leaf nodes) yang menyatakan hasil prediksi akhir. Terdapat parameter yang digunakan yaitu :
 
-   
-   Insight : 
-   
-      - Dari modelling yang kita lakukan kita melakukan modelling Algoritma Random Forest Classifier dan Decision Tree
-      - Pada Random Forest memiliki akurasi sebesar 0.64 dan Decision Tree memiliki akurasi sebesar 0.55, yang mana ini menjelaskan bahwa akurasi Random Forest lebih besar dibandingkan dengan Decision Tree
+- **random_state=42** : Parameter ini berfungsi untuk memastikan bahwa proses pelatihan model bersifat deterministik, sehingga hasil yang diperoleh akan selalu sama jika kode dijalankan ulang. Ini penting karena meskipun Decision Tree tampak deterministik, dalam praktiknya terdapat proses pemilihan split yang bisa bersifat acak ketika beberapa split memiliki nilai informasi yang setara.
+
 
 ## Evaluasi dan Pemilihan Model
+### Algoritma Random Forest 
+![image](https://github.com/user-attachments/assets/b44b5b15-4f54-4075-b522-9dc63cac38aa)
+
+- Pada kelas 'Ya' (Berisiko Serangan Jantung) :
+  - Precision = 0.43
+    - : Yang mana prediksi ini menyatakan individu berisiko (klasifikasi "Ya"), hanya 43% yang benar-benar berisiko. Ini berarti cukup banyak false positive individu yang diklasifikasikan sebagai berisiko padahal tidak.
+  - Recall = 0.05 :
+    - Dari 628 individu yang sebenarnya berisiko, hanya 5% yang berhasil dikenali oleh model. Ini adalah angka yang sangat rendah dan menjadi kelemahan utama model, karena gagal mendeteksi pasien berisiko (false negative).
+  - F1-Score = 0.10 :
+    - Nilai ini menunjukkan kinerja keseluruhan yang sangat rendah dalam menangani kasus berisiko. F1-score rendah terjadi karena baik precision maupun recall sama-sama buruk pada kelas "Ya".
+
+- Pada Kelas "Tidak" (Tidak Berisiko Serangan Jantung)
+  - Precision = 0.65 :
+    - Artinya, dari seluruh prediksi yang diklasifikasikan sebagai "Tidak", sebanyak 65% benar-benar merupakan individu yang tidak berisiko serangan jantung. Sisanya (35%) adalah false negative yaitu individu yang sebenarnya berisiko tetapi diklasifikasikan sebagai tidak berisiko.
+  - Recall = 0.96 :
+    - Dari total 1.125 individu yang benar-benar tidak berisiko (label sebenarnya "Tidak"), sebanyak 96% berhasil dikenali oleh model sebagai "Tidak". Ini menunjukkan bahwa model sangat baik dalam mengenali individu yang sehat atau tidak berisiko.
+  - F1-Score = 0.77 :
+    - Nilai ini menunjukkan keseimbangan antara precision dan recall pada kelas "Tidak". F1-score yang cukup tinggi ini memperkuat bahwa model cukup andal dalam mengidentifikasi kasus yang benar-benar tidak berisiko.
+   
+
+### Algoritma Decision Tree
+![image](https://github.com/user-attachments/assets/481c4997-db6c-4340-b277-af1c29133c99)
+
+- Pada kelas 'Ya' (Berisiko Serangan Jantung) :
+  - Precision = 0.37 :
+    - Dari semua prediksi yang menyatakan seseorang berisiko ("Ya"), hanya 37% benar-benar berisiko. Ini menunjukkan bahwa sebagian besar prediksi berisiko adalah salah (false positive).
+  - Recall = 0.38 :
+    - Dari 628 orang yang benar-benar berisiko, model hanya mampu menangkap 38% dengan benar. Artinya, sebagian besar kasus berisiko justru tidak terdeteksi (62% tidak teridentifikasi dengan benar).
+  - F1-Score = 0.37 :
+    - Kombinasi precision dan recall yang sama-sama rendah menghasilkan F1-score rendah pula, yang menunjukkan bahwa kinerja model dalam mengenali orang berisiko masih kurang memadai.
+
+- Pada Kelas "Tidak" (Tidak Berisiko Serangan Jantung)
+  - Precision = 0.65 :
+    - Artinya, dari seluruh prediksi yang menyatakan "Tidak" (tidak berisiko), sebanyak 65% benar-benar sesuai, sedangkan sisanya (35%) adalah orang yang sebenarnya berisiko tetapi diklasifikasikan sebagai tidak berisiko (false negative).
+  - Recall = 0.64 :
+    - Dari 1.125 orang yang benar-benar tidak berisiko, sebanyak 64% berhasil dikenali oleh model sebagai tidak berisiko. Sisanya (36%) diklasifikasikan salah sebagai "Ya" (Berisiko Serangan Jantung).
+  - F1-Score = 0.64 :
+    - F1-score mencerminkan keseimbangan antara precision dan recall. Nilai 0.64 menunjukkan kinerja model cukup stabil untuk kelas ini, tetapi belum optimal.
+
 ### Perbandingan Akurasi
    ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/PerbandinganAkurasi.png?raw=true)
    
