@@ -72,6 +72,33 @@ Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
 Selanjutnya saya menghapus kolom-kolom yang dianggap tidak relevan, tidak berguna, atau berisiko mengganggu proses analisis dan pemodelan, sehingga dataset menjadi lebih fokus dan efisien untuk digunakan pada tahap berikutnya seperti eksplorasi data atau pelatihan model.
   
 
+![image](https://github.com/user-attachments/assets/65f3c2a3-4641-4801-acb0-433b048ad6b0)
+
+Gambar tersebut menunjukkan hasil dari pengecekan data kosong (missing values) pada sebuah dataset. Hasil yang ditampilkan menunjukkan bahwa tidak ada nilai kosong (missing values) di seluruh kolom. Yang artinya seluruh baris pada semua kolom memiliki data lengkap.
+
+![image](https://github.com/user-attachments/assets/8ebfaa77-e711-4425-abd9-1f6b6686257f)
+
+Gambar tersebut menunjukkan bahwa tidak terdapat data yang duplikat dalam dataset yang sedang dianalisis. Hal ini mengindikasikan bahwa setiap baris data bersifat unik dan tidak ada pengulangan entri yang sama persis. 
+
+![image](https://github.com/user-attachments/assets/aac42739-1b2e-4bc1-9dd4-e83ac5adcd40)
+
+Kode yang ditampilkan pada gambar tersebut merupakan implementasi fungsi Python untuk mendeteksi outlier (nilai pencilan) dalam sebuah dataset menggunakan metode IQR (Interquartile Range). Fungsi utama dalam kode ini adalah detect_outliers_iqr(data) yang menerima sebuah DataFrame data sebagai parameter. Di dalam fungsi ini, pertama-tama dibuat dictionary kosong bernama outlier_info untuk menyimpan informasi kolom mana saja yang memiliki outlier beserta jumlahnya.
+
+
+Fungsi kemudian memproses semua kolom numerik bertipe int64 dan float64 dalam dataset menggunakan perulangan for. Untuk setiap kolom, dihitung kuartil pertama (Q1) dan kuartil ketiga (Q3), lalu dihitung rentang antar kuartil (IQR = Q3 - Q1). Berdasarkan nilai IQR, ditentukan batas bawah (lower_bound = Q1 - 1.5 * IQR) dan batas atas (upper_bound = Q3 + 1.5 * IQR). Nilai yang berada di luar rentang ini dianggap sebagai outlier. Kemudian, kode menghitung jumlah baris dalam kolom yang merupakan outlier dan jika ada, menyimpannya ke dalam dictionary outlier_info.
+
+Setelah fungsi detect_outliers_iqr(df) dipanggil (dengan df sebagai DataFrame yang ingin dianalisis), hasilnya disimpan dalam outlier_results. Bagian berikutnya dari kode bertugas menampilkan hasil deteksi. Jika terdapat hasil (yakni dictionary outlier_results tidak kosong), maka akan dicetak daftar kolom beserta jumlah outlier-nya. Jika tidak ditemukan outlier, maka dicetak pesan bahwa tidak ada outlier dalam dataset.
+
+Output pada gambar menunjukkan bahwa hanya ada satu kolom yang mengandung outlier, yaitu kolom Smoking dengan jumlah 904 outlier. Ini menunjukkan bahwa nilai-nilai dalam kolom tersebut memiliki distribusi yang ekstrem atau tidak normal, sehingga perlu perhatian lebih lanjut, misalnya dengan membersihkan data, mengkategorikan ulang, atau menggunakan metode statistik yang lebih tahan terhadap outlier.
+
+![image](https://github.com/user-attachments/assets/30f7fb77-9591-4c96-8325-c72000cb1fa8)
+
+Kode yang ditampilkan pada gambar bertujuan untuk mengubah representasi data biner dalam bentuk angka (0 dan 1) menjadi bentuk teks kategorikal yang lebih mudah dibaca, yaitu 'Tidak' dan 'Ya'. Langkah pertama adalah membersihkan nama kolom dengan df.columns.str.strip() untuk menghapus spasi di awal atau akhir nama kolom, yang sering kali terjadi akibat kesalahan saat membaca data dari file CSV atau Excel. Ini penting agar pemrosesan data selanjutnya tidak gagal karena nama kolom yang tidak konsisten.
+
+Setelah itu, kode mendeteksi kolom-kolom dalam DataFrame df yang hanya berisi nilai 0 dan 1, yang merupakan ciri khas kolom biner. Hal ini dilakukan dengan list comprehension: kolom_biner = [col for col in df.columns if sorted(df[col].dropna().unique()) == [0, 1]]. Di sini, dropna() digunakan agar nilai NaN tidak ikut memengaruhi pengecekan, dan unique() diurutkan agar bisa dibandingkan langsung dengan daftar [0, 1].
+
+Selanjutnya, kolom-kolom tersebut dicetak untuk memberi informasi kepada pengguna tentang kolom mana yang akan diubah. Kemudian, fungsi replace digunakan untuk mengganti nilai 1 menjadi 'Ya' dan 0 menjadi 'Tidak'. Proses ini membuat dataset lebih mudah dipahami, terutama saat digunakan untuk pelaporan atau visualisasi, karena 'Ya' dan 'Tidak' lebih intuitif dibandingkan angka biner. Tapi nanti nilainya akan diubah ke semula lagi pada proses encoding.
+
 ### Exploratory Data Analysis (EDA) - Univariate Analysis
 - **Categorical**:
        ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/Univariate_Categorical1.png?raw=true)
@@ -142,17 +169,23 @@ Gambar di atas dapat diinterpretasikan sebagai berikut.
 
 ## Data Preparation
 ### Data Cleaning
-![image](https://github.com/user-attachments/assets/192ec309-00e3-46e1-91aa-018a7ffbe128)
-
-   Gambar tersebut menunjukkan hasil dari pengecekan data kosong (missing values) pada sebuah DataFrame. Hasil yang ditampilkan menunjukkan bahwa tidak ada nilai kosong (missing values) di seluruh kolom. Yang artinya seluruh baris pada semua kolom memiliki data lengkap.
-
 ![image](https://github.com/user-attachments/assets/73e34506-30ed-4edf-b6e1-79762350c8cf)
 
 Gambar tersebut memperlihatkan proses pembersihan data yang duplikan dan juga selanjutnya terdapat proses pendeteksian outlier pada dataset menggunakan metode Interquartile Range (IQR). Proses ini dilakukan dengan mendefinisikan fungsi detect_outliers_iqr(data) yang secara khusus ditujukan untuk mengevaluasi setiap kolom numerik dalam DataFrame. Fungsi ini hanya bekerja pada kolom dengan tipe data int64 dan float64, yang biasanya merepresentasikan data kuantitatif seperti umur, kadar kolesterol, denyut jantung, dan sebagainya.
 
 Di dalam fungsi, langkah pertama adalah menghitung nilai kuartil pertama (Q1) dan kuartil ketiga (Q3) dari setiap kolom numerik. Selisih antara Q3 dan Q1 disebut sebagai IQR (Interquartile Range), yang mewakili rentang nilai tengah dari data. Berdasarkan IQR ini, ditentukan batas bawah dan batas atas untuk nilai normal. Nilai-nilai yang berada di luar rentang tersebut—lebih kecil dari Q1 - 1.5 × IQR atau lebih besar dari Q3 + 1.5 × IQR—dianggap sebagai outlier atau pencilan.
 
-Setelah menentukan batas tersebut, fungsi mencari data yang termasuk ke dalam kategori outlier dan menghitung jumlahnya pada setiap kolom. Jika ditemukan outlier, jumlahnya dicatat dalam sebuah dictionary outlier_info yang berisi nama kolom dan jumlah outlier pada kolom tersebut. Namun, dalam kasus yang ditampilkan pada gambar, hasil pemeriksaan menunjukkan bahwa tidak ada kolom yang mengandung outlier, yang ditandai dengan output: "Tidak ditemukan outlier di dataset."
+Setelah menentukan batas tersebut, fungsi mencari data yang termasuk ke dalam kategori outlier dan menghitung jumlahnya pada setiap kolom. Jika ditemukan outlier, jumlahnya dicatat dalam sebuah dictionary outlier_info yang berisi nama kolom dan jumlah outlier pada kolom tersebut. Namun, dalam kasus yang ditampilkan pada gambar, hasil pemeriksaan menunjukkan bahwa tidak ada kolom yang mengandung outlier, yang ditandai dengan output: "Tidak ditemukan outlier di dataset.". Hal ini terjadi karena saya telah melakukan penghapusan beberapa kolom yang ada.
+
+### Encoding Kategorikal
+![image](https://github.com/user-attachments/assets/1d0ec4c7-46e3-4bbf-9aca-3ea4817001fd)
+kode tersebut menunjukkan proses encoding data kategorikal bertipe biner, yaitu nilai 'Ya' dan 'Tidak', menjadi nilai numerik 1 dan 0. Pertama, dilakukan pengecekan terhadap nilai unik pada kolom 'Heart Attack Risk' untuk memastikan bahwa kolom tersebut hanya memiliki dua nilai kategorikal, yakni 'Ya' dan 'Tidak'. Setelah itu, dibuat sebuah daftar berisi nama-nama kolom lain yang juga memiliki tipe data serupa, yaitu kolom_ya_tidak, yang mencakup fitur seperti "Diabetes", "Smoking", "Obesity", dan lainnya. Selanjutnya, dilakukan proses encoding dengan cara menerapkan fungsi map() pada setiap kolom dalam daftar tersebut, di mana nilai 'Ya' dikonversi menjadi angka 1 dan 'Tidak' menjadi 0. Proses ini penting dalam tahap data preparation karena algoritma machine learning umumnya membutuhkan input dalam bentuk numerik, sehingga data kategorikal perlu diubah ke format yang dapat diproses oleh model.
+
+### One Hot Encoding
+![image](https://github.com/user-attachments/assets/76e79a1d-4d2f-4e04-94c3-6cb99cbb0dd8)
+
+kode tersebut menunjukkan proses one-hot encoding terhadap dua fitur kategorikal, yaitu "Sex" dan "Diet". Proses ini dilakukan dengan menggunakan fungsi pd.get_dummies() dari pustaka pandas, yang mengubah nilai kategorikal menjadi representasi numerik biner (0 dan 1) dalam bentuk kolom baru. Parameter drop_first=True digunakan agar salah satu kategori dari setiap fitur tidak disertakan (dibuang) untuk menghindari masalah multikolinearitas dalam model linier, seperti regresi logistik. Hasil encoding disimpan ke dalam variabel encoded. Kemudian, data hasil encoding tersebut digabungkan kembali dengan dataframe awal df_cleaned menggunakan pd.concat() di sepanjang kolom (axis=1). Terakhir, kolom asli "Sex" dan "Diet" dihapus dari dataframe karena sudah direpresentasikan oleh kolom hasil encoding, dengan menggunakan fungsi drop() dan inplace=True agar perubahan langsung diterapkan pada dataframe. Proses ini penting agar data kategorikal non-biner dapat digunakan oleh model machine learning yang hanya menerima input numerik.
+
 
 ### Data Splitting
 ![image](https://github.com/user-attachments/assets/a56dd698-98b8-4df8-8cb5-2a136636b8a5)
@@ -161,6 +194,10 @@ Setelah menentukan batas tersebut, fungsi mencari data yang termasuk ke dalam ka
 
 - 20% sisanya digunakan sebagai data uji (testing data) untuk mengevaluasi kinerja model.
 
+### Penjelasan Penggunaan SMOTE
+SMOTE (Synthetic Minority Over-sampling Technique) digunakan ketika kita menghadapi masalah ketidakseimbangan kelas (class imbalance) dalam dataset, yaitu ketika jumlah sampel pada salah satu kelas (biasanya kelas minoritas) jauh lebih sedikit dibandingkan kelas lainnya. Ketidakseimbangan ini dapat menyebabkan model machine learning menjadi bias terhadap kelas mayoritas, karena model cenderung "bermain aman" dengan selalu memprediksi kelas yang paling sering muncul, sehingga performa terhadap kelas minoritas menjadi sangat buruk.
+
+Dengan menggunakan SMOTE, kita menghasilkan data sintetis baru untuk kelas minoritas dengan cara membuat titik-titik data baru di sepanjang garis yang menghubungkan titik-titik data minoritas yang ada. Teknik ini berbeda dengan metode oversampling tradisional yang hanya menggandakan data, karena SMOTE menciptakan variasi yang lebih alami dan membantu model belajar pola yang lebih representatif dari kelas minoritas.
 
 ## Modelling
 ### 1. Algoritma Random Forest Classifier
@@ -177,49 +214,75 @@ Decision Tree adalah salah satu algoritma pembelajaran mesin yang paling sederha
 
 
 ## Evaluasi dan Pemilihan Model
-### Algoritma Random Forest 
-![image](https://github.com/user-attachments/assets/b44b5b15-4f54-4075-b522-9dc63cac38aa)
+### Confusion Matrix
+Confusion matrix adalah sebuah tabel yang digunakan untuk mengevaluasi kinerja model klasifikasi dengan cara membandingkan hasil prediksi model dengan nilai aktual (label sebenarnya). Confusion matrix memberikan informasi terperinci mengenai bagaimana model mengklasifikasikan data ke dalam masing-masing kelas, baik yang benar maupun yang salah.
+![image](https://github.com/user-attachments/assets/e85662b3-719b-4df7-86ee-a2351bac605d)
 
+Komponen dalam Confusion Matrix : 
+
+- True Positive (TP):
+   - Jumlah data yang diklasifikasikan benar sebagai kelas positif.
+- False Positive (FP):
+   - Jumlah data yang salah diklasifikasikan sebagai kelas positif, padahal sebenarnya negatif.
+- False Negative (FN):
+   - Jumlah data yang salah diklasifikasikan sebagai negatif, padahal sebenarnya positif.
+- True Negative (TN):
+   - Jumlah data yang diklasifikasikan benar sebagai kelas negatif.
+
+Dari confusion matrix, beberapa metrik penting dapat dihitung:
+
+- Accuracy: Persentase keseluruhan prediksi yang benar.
+- Precision: Seberapa tepat model saat memprediksi kelas positif (TP / (TP + FP)).
+- Recall (Sensitivity): Seberapa baik model dalam menangkap semua data positif (TP / (TP + FN)).
+- F1-Score: Rata-rata harmonis antara precision dan recall. Cocok digunakan jika data tidak seimbang antar kelas.
+
+Manfaat penggunaan confusion matrix : 
+- Mengetahui jenis kesalahan klasifikasi (false positive vs false negative)
+- Memahami keseimbangan kinerja model pada masing-masing kelas
+- Menilai kualitas prediksi secara lebih menyeluruh dibanding hanya melihat akurasi saja
+- Menjadi dasar dalam perbaikan model, misalnya dengan penyesuaian threshold, teknik sampling (SMOTE), atau pemilihan algoritma baru.
+
+### Algoritma Random Forest 
+![image](https://github.com/user-attachments/assets/ee6344d6-3ac3-45f4-9e5f-b0eb1e2db69c)
 - Pada kelas 'Ya' (Berisiko Serangan Jantung) :
-  - Precision = 0.43
-    - : Yang mana prediksi ini menyatakan individu berisiko (klasifikasi "Ya"), hanya 43% yang benar-benar berisiko. Ini berarti cukup banyak false positive individu yang diklasifikasikan sebagai berisiko padahal tidak.
-  - Recall = 0.05 :
-    - Dari 628 individu yang sebenarnya berisiko, hanya 5% yang berhasil dikenali oleh model. Ini adalah angka yang sangat rendah dan menjadi kelemahan utama model, karena gagal mendeteksi pasien berisiko (false negative).
-  - F1-Score = 0.10 :
-    - Nilai ini menunjukkan kinerja keseluruhan yang sangat rendah dalam menangani kasus berisiko. F1-score rendah terjadi karena baik precision maupun recall sama-sama buruk pada kelas "Ya".
+  - Precision = 0.35
+    - : Artinya dari seluruh prediksi yang diklasifikasikan sebagai "Ya", hanya 35% yang benar-benar berisiko. Hal ini menunjukkan tingkat false positive yang cukup tinggi, yaitu banyak individu yang sebenarnya tidak berisiko tetapi diprediksi berisiko oleh model.
+  - Recall = 0.19 :
+    - Dari 628 individu yang sebenarnya berisiko serangan jantung, hanya 19% yang berhasil dikenali oleh model. Ini mengindikasikan kelemahan model dalam mendeteksi kasus berisiko (false negative masih sangat tinggi).
+  - F1-Score = 0.25 :
+    - Nilai F1-Score yang rendah mencerminkan performa keseluruhan yang buruk untuk kelas "Ya", karena baik precision maupun recall sama-sama rendah. Ini sangat penting diperhatikan karena bisa berdampak serius jika kasus berisiko tidak terdeteksi.
 
 - Pada Kelas "Tidak" (Tidak Berisiko Serangan Jantung)
-  - Precision = 0.65 :
-    - Artinya, dari seluruh prediksi yang diklasifikasikan sebagai "Tidak", sebanyak 65% benar-benar merupakan individu yang tidak berisiko serangan jantung. Sisanya (35%) adalah false negative yaitu individu yang sebenarnya berisiko tetapi diklasifikasikan sebagai tidak berisiko.
-  - Recall = 0.96 :
-    - Dari total 1.125 individu yang benar-benar tidak berisiko (label sebenarnya "Tidak"), sebanyak 96% berhasil dikenali oleh model sebagai "Tidak". Ini menunjukkan bahwa model sangat baik dalam mengenali individu yang sehat atau tidak berisiko.
-  - F1-Score = 0.77 :
-    - Nilai ini menunjukkan keseimbangan antara precision dan recall pada kelas "Tidak". F1-score yang cukup tinggi ini memperkuat bahwa model cukup andal dalam mengidentifikasi kasus yang benar-benar tidak berisiko.
-   
+  - Precision = 0.64 :
+    - Dari seluruh prediksi "Tidak", sekitar 64% benar-benar tidak berisiko. Sisanya merupakan false negative, yakni individu berisiko yang gagal dikenali.
+  - Recall = 0.80 :
+    - Dari total 1.125 individu yang benar-benar tidak berisiko, sebanyak 80% berhasil dikenali oleh model. Ini menunjukkan performa model cukup baik dalam mengenali individu yang sehat atau tidak berisiko.
+  - F1-Score = 0.71 :
+    - F1-Score yang cukup tinggi ini menandakan keseimbangan yang baik antara precision dan recall pada kelas "Tidak". Model lebih andal dalam mengklasifikasikan individu yang sehat daripada yang berisiko.   
 
 ### Algoritma Decision Tree
-![image](https://github.com/user-attachments/assets/481c4997-db6c-4340-b277-af1c29133c99)
+![image](https://github.com/user-attachments/assets/1babae41-9bc2-4184-b27a-ee80e39a1c8b)
 
 - Pada kelas 'Ya' (Berisiko Serangan Jantung) :
   - Precision = 0.37 :
     - Dari semua prediksi yang menyatakan seseorang berisiko ("Ya"), hanya 37% benar-benar berisiko. Ini menunjukkan bahwa sebagian besar prediksi berisiko adalah salah (false positive).
-  - Recall = 0.38 :
-    - Dari 628 orang yang benar-benar berisiko, model hanya mampu menangkap 38% dengan benar. Artinya, sebagian besar kasus berisiko justru tidak terdeteksi (62% tidak teridentifikasi dengan benar).
-  - F1-Score = 0.37 :
-    - Kombinasi precision dan recall yang sama-sama rendah menghasilkan F1-score rendah pula, yang menunjukkan bahwa kinerja model dalam mengenali orang berisiko masih kurang memadai.
-
+  - Recall = 0.41 :
+    - Dari 628 individu yang sebenarnya berisiko serangan jantung, sebanyak 41% berhasil dikenali oleh model. Tetapi masih kurang optimal karena lebih dari separuh individu berisiko tidak dikenali (false negative).
+  - F1-Score = 0.39 :
+    - Nilai F1-Score ini menunjukkan bahwa kinerja model dalam mendeteksi individu berisiko cukup rendah, meskipun lebih baik dari sebelumnya. Hal ini mencerminkan bahwa model masih belum cukup andal dalam menangani kasus kelas minoritas "Ya".
+      
 - Pada Kelas "Tidak" (Tidak Berisiko Serangan Jantung)
   - Precision = 0.65 :
     - Artinya, dari seluruh prediksi yang menyatakan "Tidak" (tidak berisiko), sebanyak 65% benar-benar sesuai, sedangkan sisanya (35%) adalah orang yang sebenarnya berisiko tetapi diklasifikasikan sebagai tidak berisiko (false negative).
-  - Recall = 0.64 :
-    - Dari 1.125 orang yang benar-benar tidak berisiko, sebanyak 64% berhasil dikenali oleh model sebagai tidak berisiko. Sisanya (36%) diklasifikasikan salah sebagai "Ya" (Berisiko Serangan Jantung).
-  - F1-Score = 0.64 :
-    - F1-score mencerminkan keseimbangan antara precision dan recall. Nilai 0.64 menunjukkan kinerja model cukup stabil untuk kelas ini, tetapi belum optimal.
+  - Recall = 0.60 :
+    - Dari total 1.125 individu yang benar-benar tidak berisiko, hanya 60% yang berhasil dikenali dengan benar oleh model. Ini menunjukkan bahwa kemampuan model dalam mengenali kelas "Tidak" menurun dibanding model Random Forest sebelumnya.
+  - F1-Score = 0.63 :
+    - Meskipun performa recall menurun, F1-Score tetap cukup stabil karena precision-nya tidak terlalu rendah. Ini mencerminkan bahwa model memiliki keseimbangan yang sedang antara precision dan recall untuk kelas "Tidak".
 
 ### Perbandingan Akurasi
-   ![alt text](https://github.com/Rafias01/Analisis-Prediksi/blob/main/image/PerbandinganAkurasi.png?raw=true)
+![image](https://github.com/user-attachments/assets/7b770eac-5607-4c0f-95c7-36fe093d0277)
    
-   Berdasarkan hasil perbandingan akurasi antara model Random Forest dan Decision Tree yang telah diterapkan teknik SMOTE, dapat disimpulkan bahwa model Random Forest memiliki akurasi yang lebih tinggi sebesar 63,55% dibandingkan dengan Decision Tree yang hanya mencapai 54,71%. Hal ini menunjukkan bahwa Random Forest lebih baik dalam memprediksi secara keseluruhan tetapi hasil tidak bagus dikarenakan dataset tidak bagus. Secara umum, dalam skenario klasifikasi yang berkaitan dengan deteksi penyakit serius seperti serangan jantung, kemampuan model untuk mengidentifikasi kelas minoritas (recall) menjadi lebih penting daripada hanya mengejar akurasi. Oleh karena itu, meskipun akurasinya lebih rendah, Decision Tree lebih layak dipertimbangkan karena memberikan hasil yang lebih seimbang dan sensitif terhadap pasien yang benar-benar berisiko. 
+   Berdasarkan hasil perbandingan akurasi antara model Random Forest dan Decision Tree yang telah diterapkan teknik SMOTE, dapat disimpulkan bahwa model Random Forest memiliki akurasi yang lebih tinggi sebesar 58,13% dibandingkan dengan Decision Tree yang hanya mencapai 53,57%. Hal ini menunjukkan bahwa Random Forest lebih baik dalam memprediksi secara keseluruhan tetapi hasil tidak bagus dikarenakan dataset tidak bagus. Secara umum, dalam skenario klasifikasi yang berkaitan dengan deteksi penyakit serius seperti serangan jantung, kemampuan model untuk mengidentifikasi kelas minoritas (recall) menjadi lebih penting daripada hanya mengejar akurasi. Oleh karena itu, meskipun akurasinya lebih rendah, Decision Tree lebih layak dipertimbangkan karena memberikan hasil yang lebih seimbang dan sensitif terhadap pasien yang benar-benar berisiko. 
 
 ## Menjawab Problem 
 1. Apakah jenis kelamin, merokok, obesitas, diet dan Riwayat Penyakit Keluarga dapat menimbulkan penyakit serangan jantung?
