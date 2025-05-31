@@ -80,16 +80,15 @@ Gambar tersebut menunjukkan hasil dari pengecekan data kosong (missing values) p
 
 Gambar tersebut menunjukkan bahwa tidak terdapat data yang duplikat dalam dataset yang sedang dianalisis. Hal ini mengindikasikan bahwa setiap baris data bersifat unik dan tidak ada pengulangan entri yang sama persis. 
 
-![image](https://github.com/user-attachments/assets/aac42739-1b2e-4bc1-9dd4-e83ac5adcd40)
+![image](https://github.com/user-attachments/assets/5298ccc2-2819-41dc-bdf6-6dada8fd3ca8)
 
-Kode yang ditampilkan pada gambar tersebut merupakan implementasi fungsi Python untuk mendeteksi outlier (nilai pencilan) dalam sebuah dataset menggunakan metode IQR (Interquartile Range). Fungsi utama dalam kode ini adalah detect_outliers_iqr(data) yang menerima sebuah DataFrame data sebagai parameter. Di dalam fungsi ini, pertama-tama dibuat dictionary kosong bernama outlier_info untuk menyimpan informasi kolom mana saja yang memiliki outlier beserta jumlahnya.
+Kode di atas merupakan sebuah fungsi Python yang digunakan untuk menghitung jumlah total outlier dalam sebuah dataset dengan menggunakan metode IQR (Interquartile Range). Fungsi count_total_outliers_iqr menerima input berupa DataFrame, kemudian melakukan iterasi hanya pada kolom-kolom numerik (tipe data int64 dan float64) karena metode IQR hanya relevan untuk data numerik.
 
+Untuk setiap kolom numerik, fungsi ini menghitung kuartil pertama (Q1) dan kuartil ketiga (Q3) untuk menentukan rentang interkuartil (IQR = Q3 - Q1). Berdasarkan ini, batas bawah dan batas atas untuk mendeteksi outlier ditentukan dengan rumus Q1 - 1.5 * IQR dan Q3 + 1.5 * IQR. Setiap nilai yang berada di luar batas tersebut dianggap sebagai outlier. Kemudian, baris-baris yang mengandung nilai-nilai di luar rentang ini dihitung dan ditambahkan ke dalam variabel total_outliers.
 
-Fungsi kemudian memproses semua kolom numerik bertipe int64 dan float64 dalam dataset menggunakan perulangan for. Untuk setiap kolom, dihitung kuartil pertama (Q1) dan kuartil ketiga (Q3), lalu dihitung rentang antar kuartil (IQR = Q3 - Q1). Berdasarkan nilai IQR, ditentukan batas bawah (lower_bound = Q1 - 1.5 * IQR) dan batas atas (upper_bound = Q3 + 1.5 * IQR). Nilai yang berada di luar rentang ini dianggap sebagai outlier. Kemudian, kode menghitung jumlah baris dalam kolom yang merupakan outlier dan jika ada, menyimpannya ke dalam dictionary outlier_info.
+Setelah iterasi selesai untuk semua kolom numerik, fungsi mengembalikan jumlah total outlier yang ditemukan. Pada akhirnya, nilai tersebut dicetak dengan print, sehingga pengguna dapat mengetahui berapa banyak nilai outlier yang terdapat di seluruh kolom numerik dalam dataset. Pendekatan ini penting untuk memastikan bahwa data yang digunakan dalam analisis atau model machine learning bersih dari nilai-nilai ekstrem yang dapat mengganggu hasil analisis.
 
-Setelah fungsi detect_outliers_iqr(df) dipanggil (dengan df sebagai DataFrame yang ingin dianalisis), hasilnya disimpan dalam outlier_results. Bagian berikutnya dari kode bertugas menampilkan hasil deteksi. Jika terdapat hasil (yakni dictionary outlier_results tidak kosong), maka akan dicetak daftar kolom beserta jumlah outlier-nya. Jika tidak ditemukan outlier, maka dicetak pesan bahwa tidak ada outlier dalam dataset.
-
-Output pada gambar menunjukkan bahwa terdapat outlier bejumlah 904 outlier. Ini menunjukkan bahwa nilai-nilai dalam kolom tersebut memahiliki distribusi yang ekstrem atau tidak normal, sehingga perlu perhatian lebih lanjut, misalnya dengan membersihkan data, mengkategorikan ulang, atau menggunakan metode statistik yang lebih tahan terhadap outlier.
+Output pada gambar menunjukkan bahwa terdapat outlier bejumlah 904 outlier. Ini menunjukkan bahwa nilai-nilai dalam kolom tersebut memiliki distribusi yang ekstrem atau tidak normal, sehingga perlu perhatian lebih lanjut.
 
 ![image](https://github.com/user-attachments/assets/30f7fb77-9591-4c96-8325-c72000cb1fa8)
 
