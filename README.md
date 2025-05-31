@@ -89,7 +89,7 @@ Fungsi kemudian memproses semua kolom numerik bertipe int64 dan float64 dalam da
 
 Setelah fungsi detect_outliers_iqr(df) dipanggil (dengan df sebagai DataFrame yang ingin dianalisis), hasilnya disimpan dalam outlier_results. Bagian berikutnya dari kode bertugas menampilkan hasil deteksi. Jika terdapat hasil (yakni dictionary outlier_results tidak kosong), maka akan dicetak daftar kolom beserta jumlah outlier-nya. Jika tidak ditemukan outlier, maka dicetak pesan bahwa tidak ada outlier dalam dataset.
 
-Output pada gambar menunjukkan bahwa hanya ada satu kolom yang mengandung outlier, yaitu kolom Smoking dengan jumlah 904 outlier. Ini menunjukkan bahwa nilai-nilai dalam kolom tersebut memiliki distribusi yang ekstrem atau tidak normal, sehingga perlu perhatian lebih lanjut, misalnya dengan membersihkan data, mengkategorikan ulang, atau menggunakan metode statistik yang lebih tahan terhadap outlier.
+Output pada gambar menunjukkan bahwa terdapat outlier bejumlah 904 outlier. Ini menunjukkan bahwa nilai-nilai dalam kolom tersebut memahiliki distribusi yang ekstrem atau tidak normal, sehingga perlu perhatian lebih lanjut, misalnya dengan membersihkan data, mengkategorikan ulang, atau menggunakan metode statistik yang lebih tahan terhadap outlier.
 
 ![image](https://github.com/user-attachments/assets/30f7fb77-9591-4c96-8325-c72000cb1fa8)
 
