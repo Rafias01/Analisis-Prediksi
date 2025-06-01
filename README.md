@@ -31,7 +31,7 @@ Analisis ini menggunakan pendekatan kuantitatif dengan metode analisis data eksp
 Metrik yang digunakan untuk mengevaluasi seberapa baik model klasifikasi merupakan confusion matrix. confusion matrix merupakan suatu metode yang digunakan untuk melakukan perhitungan akurasi pada konsep data mining.
 
 ## Data Understanding
-Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iamsouravbanerjee/heart-attack-prediction-dataset)). Dataset ini berisi 1200 entri dengan dua kolom utama:
+Dataset diambil dari Kaggle ([link dataset](https://www.kaggle.com/datasets/iamsouravbanerjee/heart-attack-prediction-dataset)). Dataset ini berisi 8.763 entri dengan dua kolom utama:
 - Pada dataset tersebut dapat dilihat bahwa terdapat 26 kolom
 - Pada dataset tersebut terdapat 8763 data
 Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
@@ -65,11 +65,6 @@ Dibawah ini merupakan kolom-kolom yang ada di dataset tersebut :
 | Hemisphere               | Belahan bumi dimana pasien tinggal. Yang mana terdiri dari Northern Hemisphere dan Southern Hemisphere                           |
 | Heart Attack Risk        | Label target/variabel dependen (0 = risiko rendah, 1 = risiko tinggi).                                                           |
 
-
-![image](https://github.com/user-attachments/assets/c2bf01db-c0c3-4e8e-8f9e-e58b3cde90a1)
-
-
-Selanjutnya saya menghapus kolom-kolom yang dianggap tidak relevan, tidak berguna, atau berisiko mengganggu proses analisis dan pemodelan, sehingga dataset menjadi lebih fokus dan efisien untuk digunakan pada tahap berikutnya seperti eksplorasi data atau pelatihan model.
   
 
 ![image](https://github.com/user-attachments/assets/65f3c2a3-4641-4801-acb0-433b048ad6b0)
@@ -168,6 +163,10 @@ Gambar di atas dapat diinterpretasikan sebagai berikut.
 
 ## Data Preparation
 ### Data Cleaning
+![image](https://github.com/user-attachments/assets/c2bf01db-c0c3-4e8e-8f9e-e58b3cde90a1)
+
+Saya menghapus kolom-kolom yang dianggap tidak relevan, tidak berguna, atau berisiko mengganggu proses analisis dan pemodelan, sehingga dataset menjadi lebih fokus dan efisien untuk digunakan pada tahap berikutnya seperti eksplorasi data atau pelatihan model.
+
 ![image](https://github.com/user-attachments/assets/73e34506-30ed-4edf-b6e1-79762350c8cf)
 
 Gambar tersebut memperlihatkan proses pembersihan data yang duplikan dan juga selanjutnya terdapat proses pendeteksian outlier pada dataset menggunakan metode Interquartile Range (IQR). Proses ini dilakukan dengan mendefinisikan fungsi detect_outliers_iqr(data) yang secara khusus ditujukan untuk mengevaluasi setiap kolom numerik dalam DataFrame. Fungsi ini hanya bekerja pada kolom dengan tipe data int64 dan float64, yang biasanya merepresentasikan data kuantitatif seperti umur, kadar kolesterol, denyut jantung, dan sebagainya.
